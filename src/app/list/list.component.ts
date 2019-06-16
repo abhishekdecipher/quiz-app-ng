@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Todo} from '../model/Todo';
 import {TodoService} from '../services/TodoService';
 import {Router} from '@angular/router';
-import {EventDialogComponent} from '../dialog/eventDialog.component';
 import {MatDialog, MatPaginator, MatTableDataSource} from '@angular/material';
 
 @Component({
@@ -21,13 +20,13 @@ export class ListTodoComponent implements OnInit {
   Refreshes todos list on page load
 */
   ngOnInit() {
-    this.refreshTodoList();
+    this.reLoadTodoList();
   }
 
 /*
   Reloads TodoList On Deletion/Updation
 */
-  refreshTodoList() {
+  reLoadTodoList() {
     this.todoService.getTodoList().subscribe(response => {
       this.todoList = response;
       this.todoList.forEach( todo => {
@@ -55,8 +54,8 @@ export class ListTodoComponent implements OnInit {
 */
   deleteSingleTodoItem(id) {
     this.todoService.deleteTodo(id).subscribe( res => {
-      this.refreshTodoList();
-    }, error1 => {
+      this.reLoadTodoList();
+    }, error => {
       this.todoService.messageDialogBox('Some Internal Error Occured');
     });
   }
@@ -85,8 +84,8 @@ export class ListTodoComponent implements OnInit {
       this.todoService.messageDialogBox('At least one Item needs to be selected');
     }  else {
       this.todoService.deleteMultipleTodos(idListToDelete).subscribe(res => {
-        this.refreshTodoList();
-      }, error1 => {
+        this.reLoadTodoList();
+      }, error => {
         this.todoService.messageDialogBox('Some Internal Error Occured');
       });
     }

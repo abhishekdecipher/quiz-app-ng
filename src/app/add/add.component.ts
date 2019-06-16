@@ -53,7 +53,7 @@ export class AddTodoComponent implements OnInit {
         this.todoService.messageDialogBox('Added Successfully');
         this.router.navigate(['/list']);
         this.addTodoForm.reset();
-      }, error1 => {
+      }, error => {
         this.todoService.messageDialogBox('Some Internal Error Occured');
       });
     } else {

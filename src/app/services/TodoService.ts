@@ -9,10 +9,8 @@ import {MatDialog} from '@angular/material';
   providedIn: 'root',
 })
 export class TodoService {
-  todoList: Todo [];
   todoToUpdate: Todo;
   constructor(private http: HttpClient, private dialog: MatDialog) {
-    this.todoList = [];
   }
 /*
   Returns a list of todos
@@ -23,9 +21,8 @@ export class TodoService {
 /*
   Add Todo
 */
-  addTodo(data): Observable <any> {
+  addTodo(data): Observable<any> {
     return this.http.post(environment.apiUrl + '/addTodo', data);
-   // this.todoList.push(data);
   }
 /*
 Record an item that is to be updated

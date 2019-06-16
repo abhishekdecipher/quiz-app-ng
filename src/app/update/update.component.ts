@@ -20,13 +20,11 @@ export class UpdateTodoComponent implements OnInit {
 */
   ngOnInit() {
     this.todoToUpdate = this.todoService.getItemToUpdate();
-    console.log(this.todoToUpdate.time)
     this.updateTodoForm = this.fb.group({
       todoName: [this.todoToUpdate.todoName , Validators.required ],
       description: [ this.todoToUpdate.description , Validators.required ],
       time: [new Date(this.todoToUpdate.time) , [Validators.required]]
     });
-    console.log('update', this.todoToUpdate);
   }
 /*
   update an item from todo list
@@ -49,7 +47,7 @@ export class UpdateTodoComponent implements OnInit {
       this.todoService.updateTodo(updateTodoData).subscribe(res => {
         this.todoService.messageDialogBox('Updated Successfully');;
         this.router.navigate(['/list']);
-      }, error1 => {
+      }, error => {
         this.todoService.messageDialogBox('Some Internal Error Occured');
       });
     } else {
